@@ -1,52 +1,56 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class  EnemySpawner : MonoBehaviour
 {
     [SerializeField] EnemyData[] _enemisData;
 
+    private Path _path;
+
     private Transform _spawnPoint;
     private int _currentEnemyCount = 0;
     private int _currentEnemyIndex = 0;
 
     private float _spawnTime = 1.5f;
-    private float _timer = 0f;
-
 
     private void Awake()
     {
         _spawnPoint = transform.GetChild(0);
+        _path = FindObjectOfType<Path>();
     }
 
     private void Start()
     {
-        SpawnEnemies();
+        Spawn();
     }
 
-    private void Initialize()
+    private IEnumerator SpawnEnemies(float spawnCoolTime)
     {
+        EnemyData currentEnemyData = _enemisData[_currentEnemyIndex];
 
-        _enemisData[_currentEnemyIndex].Prefab
-    }
-
-    private void SpawnEnemies()
-    {
-        Instantiate(_enemisData[_currentEnemyIndex].Prefab, _spawnPoint.position, Quaternion.identity).
-
-        foreach (var enemyData in _enemisData)
+        for (_currentEnemyCount = 0; _currentEnemyCount < currentEnemyData.SpawnCount; _currentEnemyCount++)
         {
-            for (int i = 0; i < enemyData.SpawnCount; i++)
+            yield return new WaitForSeconds(spawnCoolTime);
+
+            GameObject enemy = Instantiate(currentEnemyData.Prefab,
+                _spawnPoint.position, Quaternion.identity, this.transform);
+
+            var enemyClass = enemy.GetComponent<Enemy>();
+
+            if (enemyClass != null)
             {
-                GameObject enemy = Instantiate(enemyData.Prefab, _spawnPoint.position, Quaternion.identity);
-                Enemy enemyComponent = enemy.GetComponent<Enemy>();
-                
-                if (enemyComponent != null)
-                {
-                    enemyComponent.Speed = enemyData.Speed;
-                    enemyComponent.Health = enemyData.Health;
-                    enemyComponent.Damage = enemyData.Damage;
-                }
+                enemyClass.Initialize(currentEnemyData.Speed, currentEnemyData.Health,
+                    currentEnemyData.Damage, _path.Waypoints);
             }
         }
+
+        _currentEnemyCount = 0;
+    }
+
+    // 할당과 함께 소환
+    private void Spawn()
+    {
+        StartCoroutine(SpawnEnemies(_spawnTime));
     }
 }

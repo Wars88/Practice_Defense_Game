@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b69087159c274488c758bc71c3c5dd, type: 3}
   m_Name: Alien
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3114235266064466781, guid: 59ad2d9874692b04ab506b99005b0785, type: 3}
+  Prefab: {fileID: 1491466497418441601, guid: 59ad2d9874692b04ab506b99005b0785, type: 3}
   Speed: 3
   Health: 10
   Damage: 10

@@ -17,30 +17,29 @@ public class Enemy : MonoBehaviour
         Move();
     }
 
-    public void Initialize(float speed, int health, int damage)
+    public void Initialize(float speed, int health, int damage, Transform[] waypoints)
     {
-        Path path = FindObjectOfType<Path>();
-
-        if (path != null)
-            _waypoints = path.Waypoints;
-
         _speed = speed;
         _health = health;
         _damage = damage;
+        _waypoints = waypoints;
     }
 
     private void Move()
     {
-        if (_currentWaypointIndex == _waypoints.Length)
-        {
-            _isArrived = true;
+        if (_isArrived)
             return;
-        }
 
         transform.position = Vector3.MoveTowards(transform.position, _waypoints[_currentWaypointIndex].position, _speed * Time.deltaTime);
         transform.LookAt(_waypoints[_currentWaypointIndex].position);
 
         if (Vector3.Distance(transform.position, _waypoints[_currentWaypointIndex].position) < 0.1f)
+        {
             _currentWaypointIndex++;
+
+            if (_currentWaypointIndex == _waypoints.Length)
+                _isArrived = true;
+        }
+
     }
 }
