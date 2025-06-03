@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6033692202360004234}
   - component: {fileID: 1657651341022988742}
   - component: {fileID: 2580347591227765899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy(Alien)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
