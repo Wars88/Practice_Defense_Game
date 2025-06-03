@@ -7,13 +7,31 @@ public abstract class  Tower : MonoBehaviour
     [SerializeField] protected float _attackCooldown = 1f;
     [SerializeField] int _damage = 10;
     [SerializeField] LayerMask _enemyLayer;
-    [SerializeField] Collider _currentTarget;
+    [SerializeField] Transform _currentTarget;
 
     public List<Collider> _enemiesInRange = new List<Collider>();
     protected float _attackTimer = 0f;
 
+    [SerializeField] GameObject _projectile;
+    [SerializeField] float __projectileSpeed;
+    private Transform _weapon;
+    private Transform _firePoint;
+
+    private void Awake()
+    {
+        Initialize();
+    }
+
+
+    protected virtual void Initialize()
+    {
+        _weapon = transform.GetChild(1);
+        _firePoint = _weapon.GetChild(1);
+    }
+
     public void CheckEnemy()
     {
+        // Physics.OverlapSphere사용
         Collider[] enemiesInArray = Physics.OverlapSphere(transform.position, _attackRange, _enemyLayer);
 
         _enemiesInRange.Clear();
@@ -31,10 +49,14 @@ public abstract class  Tower : MonoBehaviour
     {
         foreach (Collider enemy in _enemiesInRange)
         {
-
-            if (Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
+            if (_currentTarget == null)
+                _currentTarget = enemy.transform;
+            else
             {
-                _currentTarget = enemy;
+                if (Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
+                {
+                    _currentTarget = enemy.transform;
+                }
             }
         }
     }
@@ -43,5 +65,22 @@ public abstract class  Tower : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, _attackRange);
+    }
+
+    protected virtual void Attack()
+    {
+        if (_currentTarget == null)
+            return;
+
+        Look();
+        
+        var projectile = Instantiate(_projectile, _firePoint.position, _firePoint.rotation);
+        projectile.GetComponent<Projectile>().Initialize(_currentTarget, __projectileSpeed, _damage);
+    }
+
+    private void Look()
+    {
+        if (_currentTarget != null)
+            _weapon.rotation = Quaternion.Euler(_weapon.rotation.x, Quaternion.LookRotation(_currentTarget.position - _weapon.position).eulerAngles.y, _weapon.rotation.z);
     }
 }

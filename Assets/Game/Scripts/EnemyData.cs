@@ -5,7 +5,7 @@ public class  EnemyData : ScriptableObject
 {
     public GameObject Prefab;
     public float Speed;
-    public int Health;
+    public int MaxHealth;
     public int Damage;
     public int SpawnCount;
 }

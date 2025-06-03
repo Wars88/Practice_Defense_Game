@@ -40,7 +40,7 @@ public class  EnemySpawner : MonoBehaviour
 
             if (enemyClass != null)
             {
-                enemyClass.Initialize(currentEnemyData.Speed, currentEnemyData.Health,
+                enemyClass.Initialize(currentEnemyData.Speed, currentEnemyData.MaxHealth,
                     currentEnemyData.Damage, _path.Waypoints);
             }
         }

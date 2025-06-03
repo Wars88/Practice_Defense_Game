@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1491466497418441601, guid: 59ad2d9874692b04ab506b99005b0785, type: 3}
   Speed: 3
-  Health: 10
+  MaxHealth: 100
   Damage: 10
   SpawnCount: 15

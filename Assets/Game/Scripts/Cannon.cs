@@ -12,8 +12,9 @@ public class Cannon : Tower
             _attackTimer = 0f;
             Debug.Log("Cannon is ready to attack!");
             CheckEnemy();
+            TrackTarget();
+            Attack();
         }
-        //TrackTarget();
 
     }
 

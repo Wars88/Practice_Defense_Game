@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     private bool _isArrived = false;
     
     private float _speed;
+    private int _maxHealth;
     private int _health;
     private int _damage;
 
@@ -17,10 +19,11 @@ public class Enemy : MonoBehaviour
         Move();
     }
 
-    public void Initialize(float speed, int health, int damage, Transform[] waypoints)
+    public void Initialize(float speed, int maxHealth, int damage, Transform[] waypoints)
     {
         _speed = speed;
-        _health = health;
+        _maxHealth = maxHealth;
+        _health = maxHealth;
         _damage = damage;
         _waypoints = waypoints;
     }
@@ -40,6 +43,18 @@ public class Enemy : MonoBehaviour
             if (_currentWaypointIndex == _waypoints.Length)
                 _isArrived = true;
         }
+    }
 
+    public void TakeDamage(int damage)
+    {
+        _health = Mathf.Clamp(_health - damage, 0, _maxHealth);
+
+        if (_health <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        gameObject.SetActive(false);
     }
 }
