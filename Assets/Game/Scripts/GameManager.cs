@@ -3,6 +3,7 @@
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public MoneyManager MoneyManager { get; private set; }
 
     private void Awake()
     {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        MoneyManager = FindAnyObjectByType<MoneyManager>();
     }
 
 

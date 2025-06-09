@@ -8,4 +8,5 @@ public class  EnemyData : ScriptableObject
     public int MaxHealth;
     public int Damage;
     public int SpawnCount;
+    public int DeadMoney;
 }

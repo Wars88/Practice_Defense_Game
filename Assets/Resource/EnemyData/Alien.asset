@@ -17,3 +17,4 @@ MonoBehaviour:
   MaxHealth: 100
   Damage: 10
   SpawnCount: 15
+  DeadMoney: 10

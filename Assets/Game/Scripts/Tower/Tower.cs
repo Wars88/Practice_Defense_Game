@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public abstract class  Tower : MonoBehaviour
@@ -9,11 +10,14 @@ public abstract class  Tower : MonoBehaviour
     [SerializeField] LayerMask _enemyLayer;
     [SerializeField] Transform _currentTarget;
 
+    public bool IsClicked = false;
+
     public List<Collider> _enemiesInRange = new List<Collider>();
     protected float _attackTimer = 0f;
 
     [SerializeField] GameObject _projectile;
     [SerializeField] GameObject _attackEffect;
+    [SerializeField] GameObject _rangeEffect;
     [SerializeField] float __projectileSpeed;
     private Transform _weapon;
     private Transform _firePoint;
@@ -91,4 +95,8 @@ public abstract class  Tower : MonoBehaviour
         if (_currentTarget != null)
             _weapon.rotation = Quaternion.Euler(_weapon.rotation.x, Quaternion.LookRotation(_currentTarget.position - _weapon.position).eulerAngles.y, _weapon.rotation.z);
     }
+
+    public abstract bool PossibleToTower();
+    public abstract void PlaceTower();
+
 }

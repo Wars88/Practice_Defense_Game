@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private int _maxHealth;
     private int _health;
     private int _damage;
+    private int _deadMoney;
 
     private void Awake()
     {
@@ -27,13 +28,14 @@ public class Enemy : MonoBehaviour
         VidwHealthBar();
     }
 
-    public void Initialize(float speed, int maxHealth, int damage, Transform[] waypoints)
+    public void Initialize(float speed, int maxHealth, int damage, Transform[] waypoints, int deadMoney)
     {
         _speed = speed;
         _maxHealth = maxHealth;
         _health = maxHealth;
         _damage = damage;
         _waypoints = waypoints;
+        _deadMoney = deadMoney;
     }
 
     private void VidwHealthBar()
@@ -70,6 +72,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.MoneyManager.GetMoney(_deadMoney);
         Destroy(gameObject);
     }
 }

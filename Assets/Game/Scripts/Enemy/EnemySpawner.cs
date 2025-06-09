@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class  EnemySpawner : MonoBehaviour
@@ -12,7 +11,7 @@ public class  EnemySpawner : MonoBehaviour
     private int _currentEnemyCount = 0;
     private int _currentEnemyIndex = 0;
 
-    private float _spawnTime = 0.1f;
+    private float _spawnTime = 2.5f;
 
     private void Awake()
     {
@@ -41,7 +40,7 @@ public class  EnemySpawner : MonoBehaviour
             if (enemyClass != null)
             {
                 enemyClass.Initialize(currentEnemyData.Speed, currentEnemyData.MaxHealth,
-                    currentEnemyData.Damage, _path.Waypoints);
+                    currentEnemyData.Damage, _path.Waypoints, currentEnemyData.DeadMoney);
             }
         }
 

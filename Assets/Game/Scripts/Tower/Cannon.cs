@@ -2,6 +2,7 @@
 
 public class Cannon : Tower
 {
+    private int _cost = 100;
 
     private void Update()
     {
@@ -17,4 +18,15 @@ public class Cannon : Tower
 
     }
 
+    public override bool PossibleToTower()
+    {
+        int totalMoney = GameManager.Instance.MoneyManager.Money;
+
+        return (totalMoney >= _cost);
+    }
+
+    public override void PlaceTower()
+    {
+        GameManager.Instance.MoneyManager.SpendMoney(_cost);
+    }
 }
