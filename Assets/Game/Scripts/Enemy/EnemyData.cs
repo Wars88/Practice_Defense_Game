@@ -6,7 +6,7 @@ public class  EnemyData : ScriptableObject
     public GameObject Prefab;
     public float Speed;
     public int MaxHealth;
-    public int Damage;
     public int SpawnCount;
     public int DeadMoney;
+    public float SpawnTime = 2.5f; // 소환 시간, 필요시 조정 가능
 }

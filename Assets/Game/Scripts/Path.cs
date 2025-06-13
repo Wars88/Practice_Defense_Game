@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class Path : MonoBehaviour
 {
@@ -6,7 +7,8 @@ public class Path : MonoBehaviour
 
     private void Awake()
     {
-        Waypoints = gameObject.GetComponentsInChildren<Transform>();
+        Waypoints = gameObject.GetComponentsInChildren<Transform>()
+            .Where(a => a.transform != transform).ToArray();
     }
 
 }

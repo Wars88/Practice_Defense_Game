@@ -27,6 +27,6 @@ public class Cannon : Tower
 
     public override void PlaceTower()
     {
-        GameManager.Instance.MoneyManager.SpendMoney(_cost);
+        GameManager.Instance.MoneyManager.SpendMoney("Cannon");
     }
 }

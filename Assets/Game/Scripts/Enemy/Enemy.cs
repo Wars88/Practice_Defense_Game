@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
     private float _speed;
     private int _maxHealth;
     private int _health;
-    private int _damage;
     private int _deadMoney;
 
     private void Awake()
@@ -22,18 +21,19 @@ public class Enemy : MonoBehaviour
         _healthBarSlider = GetComponentInChildren<Slider>(true);
     }
 
+
+
     private void Update()
     {
         Move();
         VidwHealthBar();
     }
 
-    public void Initialize(float speed, int maxHealth, int damage, Transform[] waypoints, int deadMoney)
+    public void Initialize(float speed, int maxHealth, Transform[] waypoints, int deadMoney)
     {
         _speed = speed;
         _maxHealth = maxHealth;
         _health = maxHealth;
-        _damage = damage;
         _waypoints = waypoints;
         _deadMoney = deadMoney;
     }
@@ -74,5 +74,31 @@ public class Enemy : MonoBehaviour
     {
         GameManager.Instance.MoneyManager.GetMoney(_deadMoney);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Castle"))
+        {
+            Castle castle = other.GetComponent<Castle>();
+            if (castle != null)
+            {
+                castle.TakeDamage();
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public void SlowDown(float duration)
+    {
+        StartCoroutine(SlowDownCoroutine(duration));
+    }
+
+    private IEnumerator SlowDownCoroutine(float duration)
+    {
+        float originalSpeed = _speed;
+        _speed /= 2; // Slow down to half speed
+        yield return new WaitForSeconds(duration);
+        _speed = originalSpeed; // Restore original speed
     }
 }

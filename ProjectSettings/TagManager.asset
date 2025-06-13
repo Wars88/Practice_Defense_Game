@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Path
   - Weapon
+  - Castle
   layers:
   - Default
   - TransparentFX

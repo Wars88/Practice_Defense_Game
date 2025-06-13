@@ -752,7 +752,7 @@ MonoBehaviour:
   _projectile: {fileID: 337181740084755242, guid: d5f6572f27445fa4a8369997ce08b434, type: 3}
   _attackEffect: {fileID: 3150475410687903465, guid: 11746075f8cb1354fab969ba2ddfb4c9, type: 3}
   _rangeEffect: {fileID: 0}
-  __projectileSpeed: 9
+  __projectileSpeed: 10.5
 --- !u!1 &8963715886689411885
 GameObject:
   m_ObjectHideFlags: 0

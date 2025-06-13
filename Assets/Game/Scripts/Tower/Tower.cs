@@ -72,11 +72,11 @@ public abstract class  Tower : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, _attackRange);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(transform.position, _attackRange);
+    //}
 
     protected virtual void Attack()
     {
@@ -84,10 +84,17 @@ public abstract class  Tower : MonoBehaviour
             return;
 
         Look();
-        
-        var projectile = Instantiate(_projectile, _firePoint.position, _firePoint.rotation, transform);
-        Instantiate(_attackEffect, _firePoint.position, _firePoint.rotation, transform);
-        projectile.GetComponent<Projectile>().Initialize(_currentTarget, __projectileSpeed, _damage);
+        if (_projectile != null)
+        {
+            var projectile = Instantiate(_projectile, _firePoint.position, _firePoint.rotation, transform);
+            projectile.GetComponent<Projectile>().Initialize(_currentTarget, __projectileSpeed, _damage);
+        }
+
+        if (_attackEffect != null)
+        {
+            Instantiate(_attackEffect, _firePoint.position, _firePoint.rotation, transform);
+
+        }
     }
 
     private void Look()
