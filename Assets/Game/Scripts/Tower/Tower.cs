@@ -6,23 +6,23 @@ public abstract class  Tower : MonoBehaviour
 {
     [SerializeField] float _attackRange = 5f;
     [SerializeField] protected float _attackCooldown = 1f;
-    [SerializeField] int _damage = 10;
-    [SerializeField] LayerMask _enemyLayer;
-    [SerializeField] Transform _currentTarget;
+    [SerializeField] protected int _damage = 10;
+    [SerializeField] protected LayerMask _enemyLayer;
+    [SerializeField] protected Transform _currentTarget;
 
     public bool IsClicked = false;
 
     public List<Collider> _enemiesInRange = new List<Collider>();
     protected float _attackTimer = 0f;
 
-    [SerializeField] GameObject _projectile;
-    [SerializeField] GameObject _attackEffect;
-    [SerializeField] GameObject _rangeEffect;
+    [SerializeField] protected GameObject _projectile;
+    [SerializeField] protected GameObject _attackEffect;
+    [SerializeField] protected GameObject _rangeEffect;
     [SerializeField] float __projectileSpeed;
-    private Transform _weapon;
-    private Transform _firePoint;
+    protected Transform _weapon;
+    protected Transform _firePoint;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Initialize();
     }
@@ -97,7 +97,7 @@ public abstract class  Tower : MonoBehaviour
         }
     }
 
-    private void Look()
+    protected void Look()
     {
         if (_currentTarget != null)
             _weapon.rotation = Quaternion.Euler(_weapon.rotation.x, Quaternion.LookRotation(_currentTarget.position - _weapon.position).eulerAngles.y, _weapon.rotation.z);

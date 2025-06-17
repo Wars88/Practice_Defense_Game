@@ -10,6 +10,7 @@ public class GUIManager : MonoBehaviour
 
     public TowerButton TowerButton;
     public SlowButton SlowButton; 
+    public SlowButton Bomber;
     public TMP_Text MoneyText;
     public TMP_Text HpText;
     public TMP_Text EnemyCountText;
@@ -42,6 +43,7 @@ public class GUIManager : MonoBehaviour
         Next.onClick += OnNextClicked;
         GameManager.Instance.onEnemyCountChange += UpdateEnemyCount;
         SlowButton.OnClick += OnTowerButtonClicked;
+        Bomber.OnClick += OnTowerButtonClicked;
 
         UpdateEnemyCount();
     }

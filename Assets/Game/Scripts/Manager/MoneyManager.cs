@@ -10,7 +10,8 @@ public class MoneyManager : MonoBehaviour
         TowerCost = new Dictionary<string, int>
         {
             {"Cannon", 100},
-            {"Slow", 100}
+            {"Slow", 100},
+            {"Bomber", 50}
 
         };
     }
