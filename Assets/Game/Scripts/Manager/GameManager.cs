@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private EnemySpawner _enemySpawner;
 
     public UnityAction OnEnemyClear;
+    public UnityAction onEnemyCountChange;
 
     public int EnemyCount = 15;
     public bool IsStageDone { get; set; } = false;
@@ -42,10 +43,6 @@ public class GameManager : MonoBehaviour
         OnEnemyClear -= StageClear;
     }
 
-    private void Update()
-    {
-        
-    }
 
     public void WaveSpawn()
     {
@@ -56,6 +53,18 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnCoolTime);
         _enemySpawner.Spawn();
+    }
+
+    public void EnemyCountReset(int count)
+    {
+        EnemyCount = count;
+        onEnemyCountChange?.Invoke();
+    }
+
+    public void EnemyCountDown()
+    {
+        EnemyCount--;
+        onEnemyCountChange?.Invoke();
     }
 
     private void StageClear()

@@ -9,17 +9,16 @@ public class SlowButton : Button
     protected override void Awake()
     {
         base.Awake();
+        onClick = OnSlowButtonClicked;
+    }
+
+    private void OnDestroy()
+    {
+        onClick -= OnSlowButtonClicked;
     }
 
     private void OnSlowButtonClicked()
     {
-
-        if (OnClick != null)
-        {
-            Debug.Log($"OnClick 리스너 개수: {OnClick.GetInvocationList().Length}");
-            //OnClick.Invoke(TowerPrefab);
-        }
-        else
-            Debug.LogWarning("OnClick 이벤트가 설정되지 않았습니다.");
+        OnClick?.Invoke(TowerPrefab);
     }
 }

@@ -74,7 +74,6 @@ public class TowerManager : MonoBehaviour
 
     public void TowerPlacement(GameObject tower)
     {
-        Debug.Log($"타워플레이스 + {tower}");
         if (tower.GetComponent<Tower>().PossibleToTower())
         {
             _isPlacing = true;

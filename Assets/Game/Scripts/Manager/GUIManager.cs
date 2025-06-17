@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using System.Runtime.CompilerServices;
 
 public class GUIManager : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class GUIManager : MonoBehaviour
     public SlowButton SlowButton; 
     public TMP_Text MoneyText;
     public TMP_Text HpText;
+    public TMP_Text EnemyCountText;
 
     public GameObject ClearPannel;
     public Star Star;
@@ -40,6 +40,10 @@ public class GUIManager : MonoBehaviour
     {
         TryAgain.onClick += OnTryAgainClicked;
         Next.onClick += OnNextClicked;
+        GameManager.Instance.onEnemyCountChange += UpdateEnemyCount;
+        SlowButton.OnClick += OnTowerButtonClicked;
+
+        UpdateEnemyCount();
     }
 
     public void OnTowerButtonClicked(GameObject tower)
@@ -61,5 +65,10 @@ public class GUIManager : MonoBehaviour
     {
         ClearPannel.SetActive(true);
         Star.SetStar(_castle.CurrentHealth % 10); 
+    }
+
+    public void UpdateEnemyCount()
+    {
+        EnemyCountText.text = GameManager.Instance.EnemyCount.ToString();
     }
 }

@@ -26,7 +26,7 @@ public class  EnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnCoolTime);
 
-            GameManager.Instance.EnemyCount--;
+            GameManager.Instance.EnemyCountDown();
 
             GameObject enemy = Instantiate(currentEnemyData.Prefab,
                 _spawnPoint.position, Quaternion.identity, this.transform);
@@ -45,14 +45,14 @@ public class  EnemySpawner : MonoBehaviour
         if (_currentEnemyIndex == _enemisData.Length - 1)
         {
             GameManager.Instance.IsStageDone = true;
-            GameManager.Instance.EnemyCount = 0;
+            GameManager.Instance.EnemyCountReset(0);
             yield break;
         }
 
         yield return new WaitForSeconds(2);
 
         _currentEnemyIndex++;
-        GameManager.Instance.EnemyCount = _enemisData[_currentEnemyIndex].SpawnCount;
+        GameManager.Instance.EnemyCountReset(_enemisData[_currentEnemyIndex].SpawnCount);
 
         GameManager.Instance.WaveSpawn();
     }

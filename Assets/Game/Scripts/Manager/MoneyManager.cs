@@ -10,7 +10,6 @@ public class MoneyManager : MonoBehaviour
         TowerCost = new Dictionary<string, int>
         {
             {"Cannon", 100},
-            {"Ballista", 200},
             {"Slow", 100}
 
         };
@@ -18,7 +17,7 @@ public class MoneyManager : MonoBehaviour
 
     private void Update()
     {
-        GUIManager.Instance.MoneyText.text = $"Money: {Money.ToString()}";
+        GUIManager.Instance.MoneyText.text = $"Money: {Money.ToString()}"; // 업데이트에서 받는 경우
     }
 
     public void GetMoney(int money)
