@@ -2,7 +2,7 @@
 
 public class Slow : Tower
 {
-    private int _cost = 100;
+    private int _cost = 40;
 
     private void Update()
     {

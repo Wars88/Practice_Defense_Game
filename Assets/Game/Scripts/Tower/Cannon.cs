@@ -2,7 +2,7 @@
 
 public class Cannon : Tower
 {
-    private int _cost = 100;
+    private int _cost = 30;
 
     private void Update()
     {
