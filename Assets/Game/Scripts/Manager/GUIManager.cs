@@ -15,23 +15,19 @@ public class GUIManager : MonoBehaviour
     public TMP_Text HpText;
     public TMP_Text EnemyCountText;
 
-    public GameObject ClearPannel;
-    public Star Star;
+    public GameObject StageEndPannel;
+    public Star ClearStar;
+    public TMP_Text ClearText;
+    public TMP_Text DefeatText;
     public Button TryAgain;
     public Button Next;
-    
 
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
         else
-        {
             Destroy(gameObject);
-        }
 
         _towerManager = FindAnyObjectByType<TowerManager>();
         _castle = FindAnyObjectByType<Castle>();
@@ -65,12 +61,21 @@ public class GUIManager : MonoBehaviour
 
     public void ShowClearPannel()
     {
-        ClearPannel.SetActive(true);
-        Star.SetStar(_castle.CurrentHealth % 10); 
+        StageEndPannel.SetActive(true);
+        ClearStar.SetStar(_castle.CurrentHealth % 10);
+        DefeatText.gameObject.SetActive(false);
+    }
+
+    public void ShowDefeatPannel()
+    {
+        StageEndPannel.SetActive(true);
+        ClearStar.gameObject.SetActive(false);
+        ClearText.gameObject.SetActive(false);
+        Next.gameObject.SetActive(false);
     }
 
     public void UpdateEnemyCount()
     {
-        EnemyCountText.text = GameManager.Instance.EnemyCount.ToString();
+        EnemyCountText.text = GameManager.Instance.NextEnemyCount.ToString();
     }
 }

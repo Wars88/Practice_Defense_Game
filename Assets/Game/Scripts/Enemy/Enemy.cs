@@ -73,6 +73,12 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         GameManager.Instance.MoneyManager.GetMoney(_deadMoney);
+        GameManager.Instance.RemainingEnemyCount--;
+
+        if (GameManager.Instance.IsStageDone)
+        {
+            GameManager.Instance.IsEnemyClear = true;
+        }
         Destroy(gameObject);
     }
 
@@ -84,6 +90,13 @@ public class Enemy : MonoBehaviour
             if (castle != null)
             {
                 castle.TakeDamage();
+                GameManager.Instance.RemainingEnemyCount--;
+
+                if (GameManager.Instance.IsStageDone)
+                {
+                    GameManager.Instance.IsEnemyClear = true;
+                }
+
                 Destroy(gameObject);
             }
         }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30901c9c446661344a33bcd1df59e2ca, type: 3}
   m_Name: 1-1
   m_EditorClassIdentifier: 
-  stageNumber: 1
-  enemyData:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  StageNumber: 1
+  WaveData:
+  - {fileID: 11400000, guid: 720baf1c43d2814468d228bd237e3b64, type: 2}
+  - {fileID: 11400000, guid: 1c16f2e1939137a42977744fb70a9cea, type: 2}
+  - {fileID: 11400000, guid: ded5a6695ce193c45aafc35e0fe39225, type: 2}

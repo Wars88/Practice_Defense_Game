@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class  EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] EnemyData[] _enemisData;
+    [SerializeField] StageData _stageData; // 스테이지 데이터
+    [SerializeField] WaveData _currentWaveData; // 현재 웨이브 데이터   
 
     private Path _path;
 
     private Transform _spawnPoint;
-    private int _currentEnemyCount = 0;
-    private int _currentEnemyIndex = 0;
-    private float _spawnTime = 2.5f;
+
+    private int _currentWaveIndex = 0; // 현재 웨이브 인덱스
+    private float _waveDelay = 2.5f; // 웨이브간 딜레이
 
     private void Awake()
     {
@@ -18,52 +19,64 @@ public class  EnemySpawner : MonoBehaviour
         _path = FindObjectOfType<Path>();
     }
 
-    private IEnumerator SpawnEnemies(float spawnCoolTime)
+    public void StageInit(StageData stageData)
     {
-        EnemyData currentEnemyData = _enemisData[_currentEnemyIndex];
-        
-        for (_currentEnemyCount = 0; _currentEnemyCount < currentEnemyData.SpawnCount; _currentEnemyCount++)
+        _stageData = stageData;
+        _currentWaveIndex = 0; // 웨이브 인덱스 초기화
+        GameManager.Instance.IsStageDone = false; // 스테이지 완료 상태 초기화
+        GameManager.Instance.RemainingEnemyCount = 0; // 맵 내 몬스터 수 초기화
+    }
+
+    private void WaveInit()
+    {
+        _currentWaveData = _stageData.WaveData[_currentWaveIndex];
+        _waveDelay = _currentWaveData.WaveStartDelay;
+    }
+
+    private IEnumerator Waveroutine()
+    {
+        WaveInit();
+
+        // 웨이브 몬스터 수 UI 업데이트
+        int totalEnemyCount = 0;
+
+        foreach (var spawnInfo in _currentWaveData.EnemiesToSpawn)
+            totalEnemyCount += spawnInfo.SpawnCount;
+
+        GameManager.Instance.EnemyCountReset(totalEnemyCount);
+        GameManager.Instance.RemainingEnemyCount += totalEnemyCount;
+
+        // 웨이브 시작 전 딜레이
+        yield return new WaitForSeconds(_waveDelay);
+        StartCoroutine(Spawnroutine());
+    }
+
+    private IEnumerator Spawnroutine()
+    {
+        foreach (var spawnInfo in _currentWaveData.EnemiesToSpawn)
         {
-            yield return new WaitForSeconds(spawnCoolTime);
-
-            GameManager.Instance.EnemyCountDown();
-
-            GameObject enemy = Instantiate(currentEnemyData.Prefab,
-                _spawnPoint.position, Quaternion.identity, this.transform);
-
-            
-
-            var enemyClass = enemy.GetComponent<Enemy>();
-
-            if (enemyClass != null)
+            for (int enemyCount = 0; enemyCount < spawnInfo.SpawnCount; enemyCount++)
             {
-                enemyClass.Initialize(currentEnemyData.Speed, currentEnemyData.MaxHealth, _path.Waypoints, currentEnemyData.DeadMoney);
-            }
+                // 몬스터 수 UI 업데이트
+                GameManager.Instance.EnemyCountDown();
 
+                var enemyData = spawnInfo.EnemyData;
+                var enemy = Instantiate(enemyData.Prefab, _spawnPoint.position, Quaternion.identity, this.transform);
+
+                if (enemy != null)
+                    enemy.GetComponent<Enemy>().Initialize(enemyData.Speed, enemyData.MaxHealth, _path.Waypoints, enemyData.DeadMoney);
+
+                yield return new WaitForSeconds(spawnInfo.SpawnDelay);
+            }
         }
 
-        if (_currentEnemyIndex == _enemisData.Length - 1)
+        _currentWaveIndex++; // 다음 웨이브로 이동
+        if (_currentWaveIndex == _stageData.WaveData.Length)
         {
             GameManager.Instance.IsStageDone = true;
-            GameManager.Instance.EnemyCountReset(0);
             yield break;
         }
-
-        yield return new WaitForSeconds(2);
-
-        _currentEnemyIndex++;
-        GameManager.Instance.EnemyCountReset(_enemisData[_currentEnemyIndex].SpawnCount);
-
-        GameManager.Instance.WaveSpawn();
+        
+        StartCoroutine(Waveroutine());
     }
-
-    // 할당과 함께 소환
-    public void Spawn()
-    {
-        _spawnTime = _enemisData[_currentEnemyIndex].SpawnTime;
-
-        StartCoroutine(SpawnEnemies(_spawnTime));
-    }
-
-
 }
