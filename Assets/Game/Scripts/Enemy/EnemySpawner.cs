@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Transform _spawnPoint;
 
-    private int _currentWaveIndex = 0; // 현재 웨이브 인덱스
+    public int _currentWaveIndex = 0; // 현재 웨이브 인덱스
     private float _waveDelay = 2.5f; // 웨이브간 딜레이
 
     private void Awake()
@@ -33,6 +33,11 @@ public class EnemySpawner : MonoBehaviour
         _waveDelay = _currentWaveData.WaveStartDelay;
     }
 
+    public void StartSpawn()
+    {
+        StartCoroutine(Waveroutine());
+    }
+
     private IEnumerator Waveroutine()
     {
         WaveInit();
@@ -47,8 +52,10 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.RemainingEnemyCount += totalEnemyCount;
 
         // 웨이브 시작 전 딜레이
+        StartCoroutine(GameManager.Instance.Timeroutine(_waveDelay));
         yield return new WaitForSeconds(_waveDelay);
         StartCoroutine(Spawnroutine());
+        Debug.Log("다음 웨이브 시작");
     }
 
     private IEnumerator Spawnroutine()

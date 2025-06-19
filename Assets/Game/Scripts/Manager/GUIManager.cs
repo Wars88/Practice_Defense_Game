@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GUIManager : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class GUIManager : MonoBehaviour
     public TMP_Text MoneyText;
     public TMP_Text HpText;
     public TMP_Text EnemyCountText;
+    public TMP_Text TimeText;
 
     public GameObject StageEndPannel;
     public Star ClearStar;
     public TMP_Text ClearText;
     public TMP_Text DefeatText;
     public Button TryAgain;
+    public Button ToLevel;
     public Button Next;
 
     private void Awake()
@@ -37,11 +40,23 @@ public class GUIManager : MonoBehaviour
     {
         TryAgain.onClick += OnTryAgainClicked;
         Next.onClick += OnNextClicked;
+        ToLevel.onClick += OnLevelClicked;
         GameManager.Instance.onEnemyCountChange += UpdateEnemyCount;
         SlowButton.OnClick += OnTowerButtonClicked;
         Bomber.OnClick += OnTowerButtonClicked;
 
         UpdateEnemyCount();
+        StageEndPannel.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        TryAgain.onClick -= OnTryAgainClicked;
+        Next.onClick -= OnNextClicked;
+        ToLevel.onClick -= OnLevelClicked;
+        GameManager.Instance.onEnemyCountChange -= UpdateEnemyCount;
+        SlowButton.OnClick -= OnTowerButtonClicked;
+        Bomber.OnClick -= OnTowerButtonClicked;
     }
 
     public void OnTowerButtonClicked(GameObject tower)
@@ -51,18 +66,31 @@ public class GUIManager : MonoBehaviour
 
     public void OnTryAgainClicked()
     {
-        Debug.Log("Try Again Clicked");
+        SceneManager.LoadScene("Stage");
     }
 
+    public void OnToLevelClicked()
+    {
+        SceneManager.LoadScene("Level Select");
+    }
     public void OnNextClicked()
     {
-        Debug.Log("Next Clicked");
+        // 다음 스테이지인덱스
+        StageManager.Instance.CurrentStageIndex++;
+
+        SceneManager.LoadScene("Stage");
     }
+
+    public void OnLevelClicked()
+    {
+        SceneManager.LoadScene("Level Select");
+    }
+
 
     public void ShowClearPannel()
     {
         StageEndPannel.SetActive(true);
-        ClearStar.SetStar(_castle.CurrentHealth % 10);
+        ClearStar.SetStar(_castle.CurrentHealth / 3);
         DefeatText.gameObject.SetActive(false);
     }
 
@@ -78,4 +106,10 @@ public class GUIManager : MonoBehaviour
     {
         EnemyCountText.text = GameManager.Instance.NextEnemyCount.ToString();
     }
+
+    public void UpdateTimeText(float time)
+    {
+        TimeText.text = $"Next: {time:F0}s";
+    }
+
 }

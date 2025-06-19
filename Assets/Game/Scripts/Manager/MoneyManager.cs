@@ -12,13 +12,37 @@ public class MoneyManager : MonoBehaviour
             {"Cannon", 30},
             {"Slow", 40},
             {"Bomber", 50}
-
         };
+    }
+
+    private void Start()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        switch(StageManager.Instance.CurrentStageIndex)
+        {
+            case 0:
+                Money = 50;
+                break;
+            case 1:
+                Money = 60;
+                break;
+            case 2:
+                Money = 80;
+                break;
+            case 3:
+                Money = 100;
+                break;
+        }
     }
 
     private void Update()
     {
-        GUIManager.Instance.MoneyText.text = $"Money: {Money.ToString()}"; // 업데이트에서 받는 경우
+        GUIManager.Instance.MoneyText.text 
+            = $"Money: {Money.ToString()}"; // 업데이트에서 받는 경우
     }
 
     public void GetMoney(int money)

@@ -1054,9 +1054,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 687304961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b114d918b07c88744897950ed2dec3f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dff89143cd53084cbdbda8694b485f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelIndex: 2
 --- !u!1 &819735230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,9 +1189,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 819735230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b114d918b07c88744897950ed2dec3f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dff89143cd53084cbdbda8694b485f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelIndex: 1
 --- !u!1 &1296412020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,9 +1324,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296412020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b114d918b07c88744897950ed2dec3f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dff89143cd53084cbdbda8694b485f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelIndex: 0
 --- !u!1 &1436798886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,9 +1593,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439546924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b114d918b07c88744897950ed2dec3f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dff89143cd53084cbdbda8694b485f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelIndex: 3
 --- !u!1 &1512203713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1606,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1512203715}
-  - component: {fileID: 1512203714}
   m_Layer: 0
   m_Name: GUIManager
   m_TagString: Untagged
@@ -1610,24 +1613,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1512203714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512203713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 980d98b075f30f34f92a9e913d328d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 1296412025}
-  - {fileID: 819735235}
-  - {fileID: 687304966}
-  - {fileID: 1439546929}
-  _sceneName: Stage
 --- !u!4 &1512203715
 Transform:
   m_ObjectHideFlags: 0
@@ -2166,6 +2151,55 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &2098210707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098210709}
+  - component: {fileID: 2098210708}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2098210708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098210707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34ed67fd1016d04f85c4f3cc8d969ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageDatas:
+  - {fileID: 11400000, guid: 9960994416aff0d49bb9304fd955e3bd, type: 2}
+  - {fileID: 11400000, guid: b29bcef8c0e0fc14bba595636f4b669d, type: 2}
+  - {fileID: 11400000, guid: 1e6481e5b9c4d8a42bb4b518345be9a0, type: 2}
+  - {fileID: 11400000, guid: b3115ad9a0d316c409a117185385640c, type: 2}
+--- !u!4 &2098210709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098210707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2176,3 +2210,4 @@ SceneRoots:
   - {fileID: 1668288783}
   - {fileID: 2033589461}
   - {fileID: 1512203715}
+  - {fileID: 2098210709}

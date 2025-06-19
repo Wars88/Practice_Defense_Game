@@ -3,9 +3,8 @@ using UnityEngine.Events;
 
 public class Castle : MonoBehaviour
 {
-    public int MaxHealth = 30;
+    public int MaxHealth = 9;
 
-    public System.Action _onDestroyed;
     public UnityAction _onTakeDamaged;
 
     public int CurrentHealth { get; private set; }
@@ -14,13 +13,12 @@ public class Castle : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
 
-        _onDestroyed += CastleDestroy;
         _onTakeDamaged += HpUIUpdate;
+        HpUIUpdate();
     }
 
     private void OnDestroy()
     {
-        _onDestroyed -= CastleDestroy;
         _onTakeDamaged -= HpUIUpdate;
     }
 
@@ -31,12 +29,15 @@ public class Castle : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
-            _onDestroyed?.Invoke();
+            CastleDestroy();
         }
     }
 
     private void CastleDestroy()
     {
+        GameManager.Instance.IsGameOver = true;
+        GameManager.Instance.OnGameOver?.Invoke();
+
         Destroy(gameObject);
     }
 
