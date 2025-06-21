@@ -10,6 +10,7 @@ public abstract class  Tower : MonoBehaviour
     [SerializeField] protected LayerMask _enemyLayer;
     [SerializeField] protected Transform _currentTarget;
 
+
     public bool IsClicked = false;
 
     public List<Collider> _enemiesInRange = new List<Collider>();
@@ -101,6 +102,11 @@ public abstract class  Tower : MonoBehaviour
     {
         if (_currentTarget != null)
             _weapon.rotation = Quaternion.Euler(_weapon.rotation.x, Quaternion.LookRotation(_currentTarget.position - _weapon.position).eulerAngles.y, _weapon.rotation.z);
+    }
+
+    private void OnMouseDown()
+    {
+        GameManager.Instance.TowerManager.TowerSelect(transform.position);
     }
 
     public abstract bool PossibleToTower();

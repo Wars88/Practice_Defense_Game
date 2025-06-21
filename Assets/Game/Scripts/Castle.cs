@@ -7,7 +7,7 @@ public class Castle : MonoBehaviour
 
     public UnityAction _onTakeDamaged;
 
-    public int CurrentHealth { get; private set; }
+    public int CurrentHealth;
 
     private void Start()
     {

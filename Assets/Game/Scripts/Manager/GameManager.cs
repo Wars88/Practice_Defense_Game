@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public MoneyManager MoneyManager { get; private set; }
+    public TowerManager TowerManager { get; private set; }
+    [SerializeField] private Castle _castle;
 
     public UnityAction onEnemyCountChange;
     public UnityAction OnEnemyDead;
@@ -28,19 +30,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         MoneyManager = FindAnyObjectByType<MoneyManager>();
+        TowerManager = FindAnyObjectByType<TowerManager>();
     }
 
     private void Start()
     {
         OnEnemyDead += EnemyClear;
-        OnEnemyDead += StageClear;
         OnGameOver.AddListener(GameOver);
     }
 
     private void OnDestroy()
     {
         OnEnemyDead -= EnemyClear;
-        OnEnemyDead -= StageClear;
         OnGameOver.RemoveListener(GameOver);
     }
 
@@ -59,19 +60,30 @@ public class GameManager : MonoBehaviour
     private void EnemyClear()
     {
         if (RemainingEnemyCount <= 0)
+        {
             IsEnemyClear = true;
+            StartCoroutine(StageClear());
+        }
         else
             IsEnemyClear = false;
     }
 
-    private void StageClear()
+    private IEnumerator StageClear()
     {
-        if (IsStageDone && IsEnemyClear)
-        {
-            GUIManager.Instance.ShowClearPannel();
+        if (_castle.CurrentHealth <= 0)
+            yield break;
 
-            Time.timeScale = 0f; // 게임 일시정지
+        if (RemainingEnemyCount <= 0)
+        {
+            if (IsStageDone && IsEnemyClear)
+            {
+                yield return null;
+                GUIManager.Instance.ShowClearPannel();
+
+                Time.timeScale = 0f; // 게임 일시정지
+            }
         }
+
     }
 
     private void GameOver()

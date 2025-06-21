@@ -43,13 +43,8 @@ public class StageManager : MonoBehaviour
 
         if (_enemySpawner != null)
         {
-            Debug.Log($"{SceneManager.GetActiveScene().name} 씬에서 EnemySpawner 발견");
             _enemySpawner.StageInit(StageDatas[CurrentStageIndex]);
             _enemySpawner.StartSpawn();
-        }
-        else
-        {
-            Debug.LogWarning("EnemySpawner를 찾지 못했습니다.");
         }
     }
 }

@@ -24,7 +24,15 @@ public class EnemySpawner : MonoBehaviour
         _stageData = stageData;
         _currentWaveIndex = 0; // 웨이브 인덱스 초기화
         GameManager.Instance.IsStageDone = false; // 스테이지 완료 상태 초기화
-        GameManager.Instance.RemainingEnemyCount = 0; // 맵 내 몬스터 수 초기화
+    
+        foreach(var waveData in _stageData.WaveData)
+        {
+            foreach (var spawnInfo in waveData.EnemiesToSpawn)
+            {
+                GameManager.Instance.RemainingEnemyCount += spawnInfo.SpawnCount;
+            }
+        }
+        Debug.Log($"Remaining Enemy Count: {GameManager.Instance.RemainingEnemyCount}");
     }
 
     private void WaveInit()
@@ -49,13 +57,11 @@ public class EnemySpawner : MonoBehaviour
             totalEnemyCount += spawnInfo.SpawnCount;
 
         GameManager.Instance.EnemyCountReset(totalEnemyCount);
-        GameManager.Instance.RemainingEnemyCount += totalEnemyCount;
 
         // 웨이브 시작 전 딜레이
         StartCoroutine(GameManager.Instance.Timeroutine(_waveDelay));
         yield return new WaitForSeconds(_waveDelay);
         StartCoroutine(Spawnroutine());
-        Debug.Log("다음 웨이브 시작");
     }
 
     private IEnumerator Spawnroutine()

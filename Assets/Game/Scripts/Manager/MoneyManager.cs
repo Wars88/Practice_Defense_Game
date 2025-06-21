@@ -11,7 +11,7 @@ public class MoneyManager : MonoBehaviour
         {
             {"Cannon", 30},
             {"Slow", 40},
-            {"Bomber", 50}
+            {"Bomber", 60}
         };
     }
 
@@ -25,10 +25,10 @@ public class MoneyManager : MonoBehaviour
         switch(StageManager.Instance.CurrentStageIndex)
         {
             case 0:
-                Money = 50;
+                Money = 60;
                 break;
             case 1:
-                Money = 60;
+                Money = 70;
                 break;
             case 2:
                 Money = 80;

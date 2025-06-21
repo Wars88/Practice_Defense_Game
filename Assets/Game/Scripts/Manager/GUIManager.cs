@@ -25,6 +25,11 @@ public class GUIManager : MonoBehaviour
     public Button ToLevel;
     public Button Next;
 
+    public GameObject UpgradePannel;
+    public Button Upgrade;
+    public Button Sell;
+    public Button Close;
+
     private void Awake()
     {
         if (Instance == null)
@@ -44,6 +49,9 @@ public class GUIManager : MonoBehaviour
         GameManager.Instance.onEnemyCountChange += UpdateEnemyCount;
         SlowButton.OnClick += OnTowerButtonClicked;
         Bomber.OnClick += OnTowerButtonClicked;
+        Upgrade.onClick += OnUpgradeClicked;
+        Sell.onClick += OnSellClicked;
+        Close.onClick += HideUpgradePannel;
 
         UpdateEnemyCount();
         StageEndPannel.SetActive(false);
@@ -57,6 +65,9 @@ public class GUIManager : MonoBehaviour
         GameManager.Instance.onEnemyCountChange -= UpdateEnemyCount;
         SlowButton.OnClick -= OnTowerButtonClicked;
         Bomber.OnClick -= OnTowerButtonClicked;
+        Upgrade.onClick -= OnUpgradeClicked;
+        Sell.onClick -= OnSellClicked;
+        Close.onClick -= HideUpgradePannel;
     }
 
     public void OnTowerButtonClicked(GameObject tower)
@@ -76,7 +87,8 @@ public class GUIManager : MonoBehaviour
     public void OnNextClicked()
     {
         // 다음 스테이지인덱스
-        StageManager.Instance.CurrentStageIndex++;
+        if (StageManager.Instance.CurrentStageIndex < 3)
+            StageManager.Instance.CurrentStageIndex++;
 
         SceneManager.LoadScene("Stage");
     }
@@ -90,8 +102,13 @@ public class GUIManager : MonoBehaviour
     public void ShowClearPannel()
     {
         StageEndPannel.SetActive(true);
-        ClearStar.SetStar(_castle.CurrentHealth / 3);
+        ClearStar.gameObject.SetActive(true);
+        ClearText.gameObject.SetActive(true);
         DefeatText.gameObject.SetActive(false);
+        Next.gameObject.SetActive(true);
+        ToLevel.gameObject.SetActive(true);
+        TryAgain.gameObject.SetActive(true);
+        ClearStar.SetStar(_castle.CurrentHealth / 3);
     }
 
     public void ShowDefeatPannel()
@@ -99,7 +116,10 @@ public class GUIManager : MonoBehaviour
         StageEndPannel.SetActive(true);
         ClearStar.gameObject.SetActive(false);
         ClearText.gameObject.SetActive(false);
+        DefeatText.gameObject.SetActive(true);
         Next.gameObject.SetActive(false);
+        TryAgain.gameObject.SetActive(true);
+        ToLevel.gameObject.SetActive(true);
     }
 
     public void UpdateEnemyCount()
@@ -110,6 +130,29 @@ public class GUIManager : MonoBehaviour
     public void UpdateTimeText(float time)
     {
         TimeText.text = $"Next: {time:F0}s";
+    }
+
+    public void ShowUpgradePannel()
+    {
+        UpgradePannel.SetActive(true);
+        Upgrade.gameObject.SetActive(true);
+        Sell.gameObject.SetActive(true);
+        Close.gameObject.SetActive(true);
+    }
+
+    public void HideUpgradePannel()
+    {
+        UpgradePannel.SetActive(false);
+    }
+
+    public void OnUpgradeClicked()
+    {
+        Debug.Log("Upgrade clicked");
+    }
+
+    public void OnSellClicked()
+    {
+        _towerManager.TowerDelete();
     }
 
 }

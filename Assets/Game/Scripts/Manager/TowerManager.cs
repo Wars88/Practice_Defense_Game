@@ -7,10 +7,15 @@ public class TowerManager : MonoBehaviour
     private bool _isPlacing = false;
     private Dictionary<Vector3, GameObject> _gridTowers = new Dictionary<Vector3, GameObject>();
 
-    private GameObject _currentTower;
+    public GameObject _selectedTower { get; private set; }
+
+    public GameObject CurrentTower;
+    [SerializeField] GameObject _priviousTower;
+
     private Vector3 _location;
 
     private int _gridSize = 2;
+    public bool IsClicked = false;
 
     private void Update()
     {
@@ -21,21 +26,19 @@ public class TowerManager : MonoBehaviour
             if (_gridTowers.TryGetValue(GetGridPosition(), out GameObject tower))
                 return;
             else
-                _currentTower.transform.position = GetGridPosition();
+                _selectedTower.transform.position = GetGridPosition();
 
             if (Input.GetMouseButtonDown(0))
             {
                 _isPlacing = false;
 
-                var towerClass = _currentTower.GetComponent<Tower>();
+                var towerClass = _selectedTower.GetComponent<Tower>();
                 towerClass.enabled = true;
                 towerClass.PlaceTower();
 
-                _gridTowers.Add(GetGridPosition(), _currentTower);
+                _gridTowers.Add(GetGridPosition(), _selectedTower);
 
-                var slowComponent = _currentTower.GetComponent<Slow>();
-                if (slowComponent == null)
-                    _currentTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(false);
+                _selectedTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(false);
             }
         }
     }
@@ -78,14 +81,45 @@ public class TowerManager : MonoBehaviour
         {
             _isPlacing = true;
 
-            _currentTower = Instantiate(tower, Vector3.zero, Quaternion.identity);
-            _currentTower.GetComponent<Tower>().enabled = false;
-            _currentTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(true);
+            _selectedTower = Instantiate(tower, Vector3.zero, Quaternion.identity);
+            _selectedTower.GetComponent<Tower>().enabled = false;
+            _selectedTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(true);
         }
         else
         {
             Debug.Log("돈이 부족합니다.");
         }
         
+    }
+
+    public void TowerSelect(Vector3 key)
+    {
+        if (_gridTowers.TryGetValue(key, out GameObject tower))
+        {
+            GUIManager.Instance.ShowUpgradePannel();
+
+            if (CurrentTower != null)
+            {
+                _priviousTower = CurrentTower;
+                _priviousTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(false);
+
+                CurrentTower = tower;
+                CurrentTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(true);
+            }
+            else
+            {
+                CurrentTower = tower;
+                CurrentTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void TowerDelete()
+    {
+        if (CurrentTower != null)
+        {
+            _gridTowers.Remove(CurrentTower.transform.position);
+            Destroy(CurrentTower);
+        }
     }
 }

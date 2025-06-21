@@ -2,7 +2,7 @@
 
 public class Bomber : Tower
 {
-    private int _cost = 50;
+    private int _cost = 60;
 
     [Header("투석기탄 모델")]
     [SerializeField] GameObject _parabola;

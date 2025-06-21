@@ -9,6 +9,11 @@ public class LevelSelectButton : Button
         onClick += OnLevelSelected;
     }
 
+    private void OnDestroy()
+    {
+        onClick -= OnLevelSelected;
+    }
+
     private void OnLevelSelected()
     {
         StageManager.Instance.CurrentStageIndex = LevelIndex;

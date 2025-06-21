@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6441952135369142131}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2790532382564413395}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6464111184860268877}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2606666101920225859}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.6906713, z: -0, w: 0.7231688}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1.6, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 342019775475420526}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 9196202658654619230}
   - component: {fileID: 3991975014292606657}
   - component: {fileID: 248441269902605378}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: towerRound_middleA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6464111184860268877}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CannonA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 4334709004741132215}
   - component: {fileID: 6807235790955261907}
   - component: {fileID: 3838275008838270544}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: towerRound_bottomA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6880941985952891654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8543148793922181999}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8805256770200184609}
   - component: {fileID: 6989296521899834098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Range Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,9 +417,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 838661981721081809}
+  - component: {fileID: 5333764764724229212}
   - component: {fileID: 8716767200274746486}
   - component: {fileID: 7668984358887057232}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bomber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,6 +445,27 @@ Transform:
   - {fileID: 8805256770200184609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5333764764724229212
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304083627186728359}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8, y: 3.9, z: 1.8}
+  m_Center: {x: 0, y: 2.8, z: 0}
 --- !u!95 &8716767200274746486
 Animator:
   serializedVersion: 5
@@ -479,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRange: 5
   _attackCooldown: 2.5
-  _damage: 15
+  _damage: 40
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -503,7 +525,7 @@ GameObject:
   - component: {fileID: 6101515749085780838}
   - component: {fileID: 1734778836513037261}
   - component: {fileID: 3001576296556424516}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: towerRound_topA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1988666388316894173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,6 +695,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: weapon_catapult
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f8fc128c65ac60e44b40a040dc330253, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829518461224114169, guid: f8fc128c65ac60e44b40a040dc330253, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: f8fc128c65ac60e44b40a040dc330253, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -750,6 +784,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower_Ring
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4de0269a626a6e642a9f027a1d572a63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3396913584297481876, guid: 4de0269a626a6e642a9f027a1d572a63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: 4de0269a626a6e642a9f027a1d572a63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -825,8 +871,20 @@ PrefabInstance:
       value: Parabola
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6e8f9447d19143f42b4e761ca1a88840, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e8f9447d19143f42b4e761ca1a88840, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923409049141343097, guid: 6e8f9447d19143f42b4e761ca1a88840, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: 6e8f9447d19143f42b4e761ca1a88840, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

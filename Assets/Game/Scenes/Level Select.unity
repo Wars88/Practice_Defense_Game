@@ -2180,6 +2180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34ed67fd1016d04f85c4f3cc8d969ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentStageIndex: 0
   StageDatas:
   - {fileID: 11400000, guid: 9960994416aff0d49bb9304fd955e3bd, type: 2}
   - {fileID: 11400000, guid: b29bcef8c0e0fc14bba595636f4b669d, type: 2}
