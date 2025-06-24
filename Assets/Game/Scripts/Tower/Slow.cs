@@ -19,6 +19,8 @@ public class Slow : Tower
     }
 
     public override int Cost => _cost;
+
+    public override string TowerName => "Slow";
     public override bool Upgrade()
     {
         if (_isUpgraded)
@@ -32,6 +34,10 @@ public class Slow : Tower
 
     protected override void Attack()
     {
+        if (_enemiesInRange.Count == 0)
+            return;
+
+        AudioManager.Instance.PlaySoundEffect("Slow");
         foreach (var enemy in _enemiesInRange)
         {
             if (enemy != null) // null 체크 추가

@@ -29,6 +29,9 @@ public abstract class  Tower : MonoBehaviour
     }
 
     public abstract int Cost { get; }
+    public abstract string TowerName { get; }
+    public bool IsUpgraded => _isUpgraded;
+
     public abstract bool Upgrade();
     protected virtual void Initialize()
     {
@@ -90,6 +93,7 @@ public abstract class  Tower : MonoBehaviour
         {
             var projectile = Instantiate(_projectile, _firePoint.position, _firePoint.rotation, transform);
             projectile.GetComponent<Projectile>().Initialize(_currentTarget, __projectileSpeed, _damage);
+            AudioManager.Instance.PlaySoundEffect(TowerName);
         }
 
         if (_attackEffect != null)

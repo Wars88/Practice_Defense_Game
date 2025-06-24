@@ -34,9 +34,17 @@ public class Bomber : Tower
 
     public override int Cost => _cost;
 
-    public override void Upgrade()
+    public override string TowerName => "Bomber";
+
+    public override bool Upgrade()
     {
-        throw new System.NotImplementedException();
+        if (_isUpgraded)
+            return false;
+
+        _isUpgraded = true;
+        _damage *= 2;
+        _boomRange *= 1.5f; // 폭탄 범위 증가
+        return _isUpgraded;
     }
 
     protected override void Attack()
@@ -50,6 +58,7 @@ public class Bomber : Tower
             var parabola = Instantiate(_projectile, _firePoint.position, _firePoint.rotation, transform);
             parabola.GetComponent<Parabola>().Initialize(_currentTarget.position, _damage, _boomRange);
 
+            AudioManager.Instance.PlaySoundEffect("Bomber");
             _animator.SetTrigger("Attack");
         }
 

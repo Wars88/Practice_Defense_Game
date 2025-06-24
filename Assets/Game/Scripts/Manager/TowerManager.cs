@@ -37,7 +37,7 @@ public class TowerManager : MonoBehaviour
                 towerClass.PlaceTower();
 
                 _gridTowers.Add(GetGridPosition(), _selectedTower);
-
+                Debug.Log($"타워 배치: {GetGridPosition()}");
                 _selectedTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(false);
             }
         }
@@ -111,6 +111,11 @@ public class TowerManager : MonoBehaviour
                 CurrentTower = tower;
                 CurrentTower.GetComponentInChildren<TowerRing>(true).gameObject.SetActive(true);
             }
+
+            var towerClass = CurrentTower.GetComponent<Tower>();
+
+            GUIManager.Instance.UpgradeText.text = $"Up: {towerClass.Cost}";
+            GUIManager.Instance.SellText.text = $"Sell: {towerClass.Cost / 2}";
         }
     }
 
@@ -125,16 +130,17 @@ public class TowerManager : MonoBehaviour
 
                 if (canUpgrade)
                 {
-                    GameManager.Instance.MoneyManager.SpendMoney(tower.name);
+                    GameManager.Instance.MoneyManager.SpendMoney(tower.TowerName);
+                    AudioManager.Instance.PlaySoundEffect("TowerUpgrade");
                 }
                 else
                 {
-                        Debug.Log("이미 업그레이드된 타워 입니다.");
+                    AudioManager.Instance.PlaySoundEffect("CastleHit");
                 }
             }
             else
             {
-                Debug.Log("돈이 부족합니다.");
+                AudioManager.Instance.PlaySoundEffect("CastleHit");
             }
         }
     }
@@ -147,6 +153,7 @@ public class TowerManager : MonoBehaviour
 
             int resellCost = CurrentTower.GetComponent<Tower>().Cost / 2;
             GameManager.Instance.MoneyManager.GetMoney(resellCost);
+            AudioManager.Instance.PlaySoundEffect("TowerSell");
 
             Destroy(CurrentTower);
         }

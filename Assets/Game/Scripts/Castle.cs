@@ -26,6 +26,7 @@ public class Castle : MonoBehaviour
     {
         CurrentHealth--;
         _onTakeDamaged?.Invoke();
+        AudioManager.Instance.PlaySoundEffect("CastleHit");
 
         if (CurrentHealth <= 0)
         {
@@ -38,6 +39,7 @@ public class Castle : MonoBehaviour
         GameManager.Instance.IsGameOver = true;
         GameManager.Instance.OnGameOver?.Invoke();
 
+        AudioManager.Instance.PlaySoundEffect("GameOver");
         Destroy(gameObject);
     }
 

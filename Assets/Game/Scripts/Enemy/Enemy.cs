@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour
     {
         _health = Mathf.Clamp(_health - damage, 0, _maxHealth);
         _healthBarSlider.gameObject.SetActive(true);
+        AudioManager.Instance.PlaySoundEffect("EnemyHit");
 
         if (_health <= 0)
             Die();

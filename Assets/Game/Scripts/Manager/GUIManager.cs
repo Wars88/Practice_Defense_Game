@@ -27,7 +27,9 @@ public class GUIManager : MonoBehaviour
 
     public GameObject UpgradePannel;
     public Button Upgrade;
+    public TMP_Text UpgradeText;
     public Button Sell;
+    public TMP_Text SellText;
     public Button Close;
 
     public Button PauseButton;
@@ -159,6 +161,7 @@ public class GUIManager : MonoBehaviour
         Upgrade.gameObject.SetActive(true);
         Sell.gameObject.SetActive(true);
         Close.gameObject.SetActive(true);
+
     }
 
     public void HideUpgradePannel()
@@ -168,13 +171,22 @@ public class GUIManager : MonoBehaviour
 
     public void OnUpgradeClicked()
     {
-        Debug.Log("Upgrade clicked");
+        bool isUpgraded = _towerManager.CurrentTower.GetComponent<Tower>().IsUpgraded;
+        _towerManager.TowerUpgrade();
+
+        if (isUpgraded)
+        {
+            UpgradeText.text = "UP Done";
+            return;
+        }
+
+
     }
 
     public void OnSellClicked()
     {
-        HideUpgradePannel();
         _towerManager.TowerDelete();
+        HideUpgradePannel();
     }
 
 }

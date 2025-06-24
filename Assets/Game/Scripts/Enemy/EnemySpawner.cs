@@ -79,6 +79,7 @@ public class EnemySpawner : MonoBehaviour
                 if (enemy != null)
                     enemy.GetComponent<Enemy>().Initialize(enemyData.Speed, enemyData.MaxHealth, _path.Waypoints, enemyData.DeadMoney);
 
+                AudioManager.Instance.PlaySoundEffect("EnemySpawn");
                 yield return new WaitForSeconds(spawnInfo.SpawnDelay);
             }
         }

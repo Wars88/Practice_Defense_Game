@@ -20,9 +20,15 @@ public class Cannon : Tower
 
     public override int Cost => _cost;
 
+    public override string TowerName => "Cannon";
+
     public override bool Upgrade()
     {
-        throw new System.NotImplementedException();
+        if (_isUpgraded)
+            return false;
+        _isUpgraded = true;
+        _attackCooldown *= 0.6f; // 공격 속도 증가
+        return _isUpgraded;
     }
 
     public override bool PossibleToTower()
