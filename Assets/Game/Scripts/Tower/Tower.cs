@@ -9,7 +9,7 @@ public abstract class  Tower : MonoBehaviour
     [SerializeField] protected int _damage = 10;
     [SerializeField] protected LayerMask _enemyLayer;
     [SerializeField] protected Transform _currentTarget;
-
+    protected bool _isUpgraded = false;
 
     public bool IsClicked = false;
 
@@ -28,7 +28,8 @@ public abstract class  Tower : MonoBehaviour
         Initialize();
     }
 
-
+    public abstract int Cost { get; }
+    public abstract bool Upgrade();
     protected virtual void Initialize()
     {
         _weapon = transform.GetChild(1);

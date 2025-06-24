@@ -3,6 +3,7 @@
 public class Slow : Tower
 {
     private int _cost = 40;
+    private float _stateTime = 1.5f;
 
     private void Update()
     {
@@ -17,6 +18,18 @@ public class Slow : Tower
 
     }
 
+    public override int Cost => _cost;
+    public override bool Upgrade()
+    {
+        if (_isUpgraded)
+            return false;
+
+        _isUpgraded = true;
+        _stateTime *= 2;
+
+        return _isUpgraded;
+    }
+
     protected override void Attack()
     {
         foreach (var enemy in _enemiesInRange)
@@ -26,7 +39,7 @@ public class Slow : Tower
                 var enemyComponent = enemy.GetComponent<Enemy>();
                 if (enemyComponent != null)
                 {
-                    enemyComponent.SlowDown(1.5f);
+                    enemyComponent.SlowDown(_stateTime);
                 }
             }
         }

@@ -2182,8 +2182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentStageIndex: 0
   StageDatas:
-  - {fileID: 11400000, guid: 9960994416aff0d49bb9304fd955e3bd, type: 2}
-  - {fileID: 11400000, guid: b29bcef8c0e0fc14bba595636f4b669d, type: 2}
+  - {fileID: 11400000, guid: 2ac62e941808e074187a5d38a15e4ece, type: 2}
+  - {fileID: 11400000, guid: 73f2d9f31ea369c4a8d657233a529390, type: 2}
   - {fileID: 11400000, guid: 1e6481e5b9c4d8a42bb4b518345be9a0, type: 2}
   - {fileID: 11400000, guid: b3115ad9a0d316c409a117185385640c, type: 2}
 --- !u!4 &2098210709

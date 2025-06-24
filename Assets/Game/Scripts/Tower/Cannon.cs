@@ -18,6 +18,13 @@ public class Cannon : Tower
 
     }
 
+    public override int Cost => _cost;
+
+    public override bool Upgrade()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override bool PossibleToTower()
     {
         int totalMoney = GameManager.Instance.MoneyManager.Money;

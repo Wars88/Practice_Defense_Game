@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30901c9c446661344a33bcd1df59e2ca, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 1-4
-  m_EditorClassIdentifier: 
-  StageNumber: 4
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  StageNumber: 0
   WaveData:
   - {fileID: 11400000, guid: 6427e06c36099a2439223c85173d1a53, type: 2}
   - {fileID: 11400000, guid: 9ab792f736456414fad0dc3ff9bfabe3, type: 2}

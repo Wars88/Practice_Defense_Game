@@ -114,11 +114,40 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+    public void TowerUpgrade()
+    {
+        if (CurrentTower != null)
+        {
+            var tower = CurrentTower.GetComponent<Tower>();
+            if (tower.PossibleToTower())
+            {
+                bool canUpgrade = tower.Upgrade();
+
+                if (canUpgrade)
+                {
+                    GameManager.Instance.MoneyManager.SpendMoney(tower.name);
+                }
+                else
+                {
+                        Debug.Log("이미 업그레이드된 타워 입니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("돈이 부족합니다.");
+            }
+        }
+    }
+
     public void TowerDelete()
     {
         if (CurrentTower != null)
         {
             _gridTowers.Remove(CurrentTower.transform.position);
+
+            int resellCost = CurrentTower.GetComponent<Tower>().Cost / 2;
+            GameManager.Instance.MoneyManager.GetMoney(resellCost);
+
             Destroy(CurrentTower);
         }
     }

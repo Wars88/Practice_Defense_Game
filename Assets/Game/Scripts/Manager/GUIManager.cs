@@ -30,6 +30,9 @@ public class GUIManager : MonoBehaviour
     public Button Sell;
     public Button Close;
 
+    public Button PauseButton;
+    public GameObject PasuePannel;
+
     private void Awake()
     {
         if (Instance == null)
@@ -52,6 +55,7 @@ public class GUIManager : MonoBehaviour
         Upgrade.onClick += OnUpgradeClicked;
         Sell.onClick += OnSellClicked;
         Close.onClick += HideUpgradePannel;
+        PauseButton.onClick += OnPauseButtonClicked;
 
         UpdateEnemyCount();
         StageEndPannel.SetActive(false);
@@ -68,6 +72,23 @@ public class GUIManager : MonoBehaviour
         Upgrade.onClick -= OnUpgradeClicked;
         Sell.onClick -= OnSellClicked;
         Close.onClick -= HideUpgradePannel;
+        PauseButton.onClick -= OnPauseButtonClicked;
+    }
+
+    public void OnPauseButtonClicked()
+    {
+        if (Time.timeScale == 1)
+        {
+            Debug.Log("Pause Game");
+            Time.timeScale = 0; // 게임 일시정지
+            PasuePannel.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Resume Game");
+            Time.timeScale = 1; // 게임 일시정지
+            PasuePannel.SetActive(false);
+        }
     }
 
     public void OnTowerButtonClicked(GameObject tower)
@@ -152,6 +173,7 @@ public class GUIManager : MonoBehaviour
 
     public void OnSellClicked()
     {
+        HideUpgradePannel();
         _towerManager.TowerDelete();
     }
 

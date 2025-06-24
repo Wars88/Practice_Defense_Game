@@ -32,6 +32,13 @@ public class Bomber : Tower
 
     }
 
+    public override int Cost => _cost;
+
+    public override void Upgrade()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void Attack()
     {
         if (_currentTarget == null)
