@@ -5,31 +5,11 @@ namespace Select
 {
     public class GUIManager : MonoBehaviour
     {
-        public Button[] buttons;
+        public Button HomeButton;
 
-        [SerializeField] string _sceneName;
-
-
-        private void Start()
+        public void OnHomeButtonClicked()
         {
-            foreach (var button in buttons)
-            {
-                button.onClick += ChangeToSelectScene;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            foreach (var button in buttons)
-            {
-                button.onClick -= ChangeToSelectScene;
-            }
-        }
-
-        // 1. 기본적인 씬 전환 (씬 이름으로)
-        private void ChangeToSelectScene()
-        {
-            SceneManager.LoadScene(_sceneName);
+            SceneManager.LoadScene("Lobby");
         }
     }
 }

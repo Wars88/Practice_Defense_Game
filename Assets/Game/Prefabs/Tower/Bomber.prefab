@@ -513,7 +513,7 @@ MonoBehaviour:
   _rangeEffect: {fileID: 919132149155446097, guid: 4de0269a626a6e642a9f027a1d572a63, type: 3}
   __projectileSpeed: 0
   _parabola: {fileID: 6520050573383529955}
-  _boomRange: 5
+  _boomRange: 6
 --- !u!1 &7209266486589475962
 GameObject:
   m_ObjectHideFlags: 0

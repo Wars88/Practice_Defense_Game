@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private int _maxHealth;
     private int _health;
     private int _deadMoney;
+    private bool _isDead;
 
     private void Awake()
     {
@@ -73,6 +74,9 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        if (_isDead) return; // 이미 죽은 경우 중복 처리 방지
+
+        _isDead = true;
         GameManager.Instance.MoneyManager.GetMoney(_deadMoney);
         GameManager.Instance.RemainingEnemyCount--;
         GameManager.Instance.OnEnemyDead?.Invoke();

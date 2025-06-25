@@ -81,13 +81,11 @@ public class GUIManager : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
-            Debug.Log("Pause Game");
             Time.timeScale = 0; // 게임 일시정지
             PasuePannel.SetActive(true);
         }
         else
         {
-            Debug.Log("Resume Game");
             Time.timeScale = 1; // 게임 일시정지
             PasuePannel.SetActive(false);
         }
@@ -161,6 +159,7 @@ public class GUIManager : MonoBehaviour
         Upgrade.gameObject.SetActive(true);
         Sell.gameObject.SetActive(true);
         Close.gameObject.SetActive(true);
+
 
     }
 
